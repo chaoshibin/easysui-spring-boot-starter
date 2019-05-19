@@ -6,7 +6,7 @@
     <artifactId>easysui-spring-boot-starter</artifactId>
     <version>1.0.0</version>
     <name>easysui-spring-boot-starter</name>
-    <description>easysui starter for Spring Boot</description>
+    <description>Easysui Starter for Spring Boot</description>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
