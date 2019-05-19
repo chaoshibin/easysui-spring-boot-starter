@@ -11,7 +11,6 @@ import com.easysui.starter.configuration.AspectConfiguration;
 import com.easysui.zookeeper.configuration.ZookeeperConfiguration;
 import com.easysui.zookeeper.configuration.ZookeeperProperties;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
@@ -33,25 +32,25 @@ public class EasySuiAutoConfigure {
 
     @Bean
     @ConfigurationProperties("easysui.zookeeper")
-    public ZookeeperProperties zookeeperProperties(){
+    public ZookeeperProperties zookeeperProperties() {
         return new ZookeeperProperties();
     }
 
     @Bean
     @ConfigurationProperties("easysui.jedis")
-    public JedisProperties jedisProperties(){
+    public JedisProperties jedisProperties() {
         return new JedisProperties();
     }
 
     @Bean
     @ConfigurationProperties("easysui.http")
-    public RestTemplateProperties restTemplateProperties(){
+    public RestTemplateProperties restTemplateProperties() {
         return new RestTemplateProperties();
     }
 
     @Bean
     @ConfigurationProperties("easysui.mybatis")
-    public MyBatisProperties myBatisProperties(){
+    public MyBatisProperties myBatisProperties() {
         return new MyBatisProperties();
     }
 }
