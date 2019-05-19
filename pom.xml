@@ -64,7 +64,6 @@
         </dependency>
         <!--zookeeper end-->
     </dependencies>
-
     <build>
         <plugins>
             <plugin>
