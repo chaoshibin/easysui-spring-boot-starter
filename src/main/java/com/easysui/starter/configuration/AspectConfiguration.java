@@ -2,6 +2,8 @@ package com.easysui.starter.configuration;
 
 import com.easysui.cache.aspect.EasyCacheAspect;
 import com.easysui.distribute.lock.aspect.EasyLockAspect;
+import com.easysui.distribute.lock.service.DistributeLockService;
+import com.easysui.distribute.lock.service.impl.RedisDistributeLockServiceImpl;
 import com.easysui.log.aspect.EasyLogAspect;
 import com.easysui.validate.aspect.EasyValidateAspect;
 import lombok.extern.slf4j.Slf4j;
@@ -44,5 +46,12 @@ public class AspectConfiguration {
     public EasyCacheAspect easyCacheAspect() {
         log.info("easysui初始化缓存切面");
         return new EasyCacheAspect();
+    }
+
+    @Bean("redisDistributeLockService")
+    @ConditionalOnProperty(prefix = "easysui.distribute-lock", name = "enabled", havingValue = "true")
+    public DistributeLockService redisDistributeLockService() {
+        log.info("easysui初始化分布式锁切面");
+        return new RedisDistributeLockServiceImpl();
     }
 }
