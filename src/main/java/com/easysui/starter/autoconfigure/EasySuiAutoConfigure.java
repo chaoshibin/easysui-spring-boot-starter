@@ -9,12 +9,12 @@ import com.easysui.redis.configuration.JedisConfiguration;
 import com.easysui.redis.configuration.JedisProperties;
 import com.easysui.redis.configuration.RedisConfig;
 import com.easysui.starter.configuration.AspectConfiguration;
-import com.easysui.zookeeper.configuration.ZookeeperConfiguration;
 import com.easysui.zookeeper.configuration.ZookeeperProperties;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.curator.framework.CuratorFramework;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -30,7 +30,6 @@ import javax.sql.DataSource;
 @Configuration
 @Import({AspectConfiguration.class,
         JedisConfiguration.class,
-        ZookeeperConfiguration.class,
         RestTemplateConfiguration.class,
         RedisConfig.class,
         MyBatisAutoConfiguration.class})
@@ -45,6 +44,7 @@ public class EasySuiAutoConfigure {
 
     @Bean
     @ConfigurationProperties("easysui.zookeeper")
+    @ConditionalOnProperty(prefix = "easysui.zookeeper", name = "enabled", havingValue = "true")
     @ConditionalOnClass(CuratorFramework.class)
     public ZookeeperProperties zookeeperProperties() {
         return new ZookeeperProperties();
@@ -59,6 +59,7 @@ public class EasySuiAutoConfigure {
 
     @Bean
     @ConfigurationProperties("easysui.http")
+    @ConditionalOnProperty(prefix = "easysui.http", name = "enabled", havingValue = "true")
     //@ConditionalOnClass({HttpClient.class, RestTemplate.class})
     public RestTemplateProperties restTemplateProperties() {
         return new RestTemplateProperties();
