@@ -1,4 +1,4 @@
-package com.easysui.starter.autoconfigure;
+package com.easysui.starter.configuration;
 
 import com.easysui.core.configuration.AppConfiguration;
 import com.easysui.http.RestTemplateConfiguration;
@@ -8,7 +8,6 @@ import com.easysui.mybatis.properties.MyBatisProperties;
 import com.easysui.redis.configuration.JedisConfiguration;
 import com.easysui.redis.configuration.JedisProperties;
 import com.easysui.redis.configuration.RedisConfig;
-import com.easysui.starter.configuration.AspectConfiguration;
 import com.easysui.zookeeper.configuration.ZookeeperProperties;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.curator.framework.CuratorFramework;
@@ -33,7 +32,7 @@ import javax.sql.DataSource;
         RestTemplateConfiguration.class,
         RedisConfig.class,
         MyBatisAutoConfiguration.class})
-public class EasySuiAutoConfigure {
+public class EasySuiAutoConfiguration {
 
     @Bean
     @ConfigurationProperties("easysui.config")

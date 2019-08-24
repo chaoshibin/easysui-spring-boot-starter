@@ -1,2 +1,2 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-com.easysui.starter.autoconfigure.EasySuiAutoConfigure
+com.easysui.starter.configuration.EasySuiAutoConfiguration

@@ -5,10 +5,10 @@ import com.easysui.distribute.lock.aspect.EasyLockAspect;
 import com.easysui.distribute.lock.service.DistributeLockService;
 import com.easysui.distribute.lock.service.impl.RedisDistributeLockServiceImpl;
 import com.easysui.log.aspect.EasyLogAspect;
-import com.easysui.validate.aspect.EasyValidateAspect;
+import com.easysui.validation.aspect.EasyValidationAspect;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 
 /**
@@ -18,40 +18,40 @@ import org.springframework.context.annotation.Bean;
 public class AspectConfiguration {
     @Bean
     @ConditionalOnMissingBean
-    @ConditionalOnProperty(prefix = "easysui.log", name = "enabled", havingValue = "true")
+    @ConditionalOnBean(EasyLogMarkerConfiguration.Marker.class)
     public EasyLogAspect easyLogAspect() {
-        log.info("easysui初始化日志切面");
+        log.info("easy sui初始化日志切面");
         return new EasyLogAspect();
     }
 
     @Bean
     @ConditionalOnMissingBean
-    @ConditionalOnProperty(prefix = "easysui.validate", name = "enabled", havingValue = "true")
-    public EasyValidateAspect easyValidateAspect() {
-        log.info("easysui初始化参数校验切面");
-        return new EasyValidateAspect();
+    @ConditionalOnBean(EasyValidationMarkerConfiguration.Marker.class)
+    public EasyValidationAspect easyValidationAspect() {
+        log.info("easy sui初始化参数校验切面");
+        return new EasyValidationAspect();
     }
 
     @Bean
     @ConditionalOnMissingBean
-    @ConditionalOnProperty(prefix = "easysui.distribute-lock", name = "enabled", havingValue = "true")
+    @ConditionalOnBean(EasyLockMarkerConfiguration.Marker.class)
     public EasyLockAspect easyLockAspect() {
-        log.info("easysui初始化分布式锁切面");
+        log.info("easy sui初始化分布式锁切面");
         return new EasyLockAspect();
     }
 
     @Bean
-    @ConditionalOnMissingBean
-    @ConditionalOnProperty(prefix = "easysui.cache", name = "enabled", havingValue = "true")
-    public EasyCacheAspect easyCacheAspect() {
-        log.info("easysui初始化缓存切面");
-        return new EasyCacheAspect();
+    @ConditionalOnBean(EasyLockMarkerConfiguration.Marker.class)
+    public DistributeLockService redisDistributeLockService() {
+        log.info("easy sui初始化分布式锁切面");
+        return new RedisDistributeLockServiceImpl();
     }
 
-    @Bean("redisDistributeLockService")
-    @ConditionalOnProperty(prefix = "easysui.distribute-lock", name = "enabled", havingValue = "true")
-    public DistributeLockService redisDistributeLockService() {
-        log.info("easysui初始化分布式锁切面");
-        return new RedisDistributeLockServiceImpl();
+    @Bean
+    @ConditionalOnMissingBean
+    @ConditionalOnBean(EasyCacheMarkerConfiguration.Marker.class)
+    public EasyCacheAspect easyCacheAspect() {
+        log.info("easy sui初始化缓存切面");
+        return new EasyCacheAspect();
     }
 }
