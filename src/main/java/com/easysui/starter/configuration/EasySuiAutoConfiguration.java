@@ -9,9 +9,6 @@ import com.easysui.redis.configuration.RedisConfig;
 import com.easysui.zookeeper.configuration.ZookeeperProperties;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.curator.framework.CuratorFramework;
-import org.apache.http.client.HttpClient;
-import org.apache.ibatis.session.SqlSessionFactory;
-import org.mybatis.spring.SqlSessionFactoryBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -19,7 +16,6 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
-import org.springframework.web.client.RestTemplate;
 
 import javax.sql.DataSource;
 
@@ -52,7 +48,7 @@ public class EasySuiAutoConfiguration {
     @Bean
     @ConfigurationProperties("easysui.http")
     @ConditionalOnProperty(prefix = "easysui.http", name = "enabled", havingValue = "true")
-    @ConditionalOnClass({HttpClient.class, RestTemplate.class})
+    //@ConditionalOnClass({HttpClient.class, RestTemplate.class})
     public RestTemplateProperties restTemplateProperties() {
         return new RestTemplateProperties();
     }
@@ -60,7 +56,7 @@ public class EasySuiAutoConfiguration {
     @Bean
     @ConfigurationProperties("easysui.mybatis")
     @ConditionalOnBean(DataSource.class)
-    @ConditionalOnClass({SqlSessionFactory.class, SqlSessionFactoryBean.class})
+    //@ConditionalOnClass({SqlSessionFactory.class, SqlSessionFactoryBean.class})
     public MyBatisProperties myBatisProperties() {
         return new MyBatisProperties();
     }
