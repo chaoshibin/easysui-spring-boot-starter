@@ -12,7 +12,7 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean
 import org.springframework.context.annotation.Bean;
 
 /**
- * @author CHAO 2019/5/18 18:09
+ * @author Chao Shibin 2019/5/18 18:09
  */
 @Slf4j
 public class AspectConfiguration {
@@ -43,7 +43,7 @@ public class AspectConfiguration {
     @Bean
     @ConditionalOnBean(EasyLockMarkerConfiguration.Marker.class)
     public DistributeLockService redisDistributeLockService() {
-        log.info("easy sui初始化分布式锁切面");
+        log.info("easy sui初始化分布式锁服务");
         return new RedisDistributeLockServiceImpl();
     }
 

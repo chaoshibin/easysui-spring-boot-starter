@@ -20,7 +20,7 @@ import org.springframework.context.annotation.Import;
 import javax.sql.DataSource;
 
 /**
- * @author CHAO 2019/5/18 14:15
+ * @author Chao Shibin 2019/5/18 14:15
  */
 @Slf4j
 @Configuration
